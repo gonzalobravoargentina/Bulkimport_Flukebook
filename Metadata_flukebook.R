@@ -39,3 +39,4 @@ dat2$Encounter.informOther0.emailAddress <- "candelariabelenpiemonte@gmail.com"
 #Write a .xlsx, ready to be used in flukebook. The file will be saved in the same folder of the photos
 library(writexl)
 write_xlsx(dat2, "dataphotos.xlsx")
+
