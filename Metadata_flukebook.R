@@ -10,7 +10,7 @@ library(exifr)#packaged used for reading photo metadata.
 dat <- read_exif(files) #read metadata of the list pf photos
 dat <- as.data.frame(dat)# create a Dataframe with the metadata
 
-#we make some arregements with date information
+#we make some arrangements with date information
 library(lubridate)
 #converted date column as date format
 dat$Dateconverted <- as.POSIXct(dat$DateCreated, format = "%Y:%m:%d %H:%M:%OS")
@@ -24,8 +24,8 @@ dat$UnixTimestamp <- as.numeric(dat$Dateconverted) * 1000 # Convert to Unix time
 #We create a dataframe with the variables of interest. In this case we use as reference the wilbook excel (WildbookStandardFormat.xlsx) that is uploaded here.
 
 library(dplyr)
-#if some of the fields of the metadata is empty this code will not work. Make shure that the information of the metadata that you are calling in this code is present in teh dataframe "dat". If not you should remove those fields without infromation. 
-dat2<- dplyr::select (dat,Encounter.mediaAsset0=SourceFile,Encounter.verbatimLocality=State,Encounter.decimalLatitude=GPSLatitude,Encounter.decimalLongitude=GPSLongitude,Encounter.year=Year,Encounter.month=Month,Encounter.day=Day,Encounter.hour=Hour,Encounter.minutes=Minutes, Encounter.country=Country,Encounter.dateInMilliseconds=UnixTimestamp,Encounter.day=Day,Encounter.hour=Hour,Encounter.minutes=Minutes,Encounter.photographer0.fullName=Creator,Encounter.photographer0.emailAddress=CreatorWorkEmail)
+#if some of the fields of the metadata is empty this code will not work. Make shure that the information of the metadata that you are calling in this code is present in teh dataframe "dat". If not you should remove those fields without information. 
+dat2<- dplyr::select (dat,Encounter.mediaAsset0=SourceFile,Encounter.verbatimLocality=State,Encounter.decimalLatitude=GPSLatitude,Encounter.decimalLongitude=GPSLongitude,Encounter.year=Year,Encounter.month=Month,Encounter.day=Day,Encounter.hour=Hour,Encounter.minutes=Minutes, Encounter.country=Country,Encounter.dateInMilliseconds=UnixTimestamp,Encounter.day=Day,Encounter.hour=Hour,Encounter.minutes=Minutes,Encounter.photographer0.fullName=Creator,Encounter.photographer0.emailAddress=CreatorWorkEmail,Encounter.sex=Keywords)
 
 #Here we include information that is specific of each proyect
 dat2$Encounter.submitterID <- "educacionocc" #case sensitive 
@@ -35,6 +35,7 @@ dat2$Encounter.specificEpithet="australis" #species
 dat2$Encounter.livingStatus="alive"
 dat2$Encounter.submitterOrganization="OCC"
 dat2$Encounter.informOther0.emailAddress <- "candelariabelenpiemonte@gmail.com"      
+
 
 #Write a .xlsx, ready to be used in flukebook. The file will be saved in the same folder of the photos
 library(writexl)
